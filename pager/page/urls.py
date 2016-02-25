@@ -10,7 +10,7 @@ router.register(r'pages', views.PageViewSet)
 urlpatterns = [
     url(
         r'^',
-        include(router.urls)
+        include(router.urls),
     ),
     url(
         r'^api-auth/',
