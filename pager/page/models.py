@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from mptt.models import MPTTModel, TreeForeignKey
 
-
+# Status choices determine whether or not a user can access a given 'Page' instance.
 PAGE_STATUS_CHOICES = (
     ('published', 'published'),
     ('draft', 'draft'),
@@ -12,6 +12,9 @@ PAGE_STATUS_CHOICES = (
 
 
 class Page(MPTTModel):
+    """
+    Base page model. Includes data to define a standard static HTML page.
+    """
     title = models.CharField(
         max_length=150,
         blank=False
@@ -38,6 +41,13 @@ class Page(MPTTModel):
         max_length=20,
         blank=False
     )
+    # Allows for a Page instance to have a 'parent-child' relationship with
+    # another Page instance. A Page instance's children can be accessed by
+    # calling Page.children. Similarly, a child Page instance can access it's
+    # parent via Page.parent. This is a many to one relationship.
+    #
+    # See https://django-mptt.github.io/django-mptt/models.html#mpttmodel-instance-methods
+    # for more methods.
     parent = TreeForeignKey(
         'self',
         blank=True,
@@ -53,6 +63,16 @@ class Page(MPTTModel):
         verbose_name_plural = 'Pages'
 
     def save(self, *args, **kwargs):
+        """
+        Override save method to automatically generate a slug of the page title.
+        :param args:
+        :param kwargs:
+        :return: Uses super to pass this model instance back to the original
+        save method.
+
+        See https://rhettinger.wordpress.com/2011/05/26/super-considered-super/
+        for more information.
+        """
         if not self.slug:
             self.slug = slugify(self.title)
         super(Page, self).save(*args, **kwargs)

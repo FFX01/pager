@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    # TODO: Include more safe user model fields
 
     class Meta:
         model = User

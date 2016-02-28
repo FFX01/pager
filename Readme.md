@@ -40,3 +40,5 @@ At this time Pager only does one thing. It serves a 'Page' model. This 'Page' mo
 It is very easy to contribute. You can fork this repo and send a pull request. Make sure to add your name to contributors.txt. Try to submit an issue to discuss your modifications before the pull request so we can see if they are inline with Pager's goals.
 
 You can also open an issue for a feature request or architecture suggestion.
+
+You can also check out the code for any _TODO_ comments.

@@ -12,8 +12,10 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class PageViewSet(viewsets.ModelViewSet):
-    # TODO: Check how this actually works.
-    queryset = Page.objects.all()
+    # TODO: Allow only the author of a page or a superuser to modify a page.
+    # TODO: Allow users to see their own unpublished pages.
+
+    queryset = Page.objects.filter(status='published')
     serializer_class = PageSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
