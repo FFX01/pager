@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from mptt.models import MPTTModel, TreeForeignKey
 
+
+# TODO: Create more content model types.
+# TODO: Create helper class in separate module to allow easy creation of view for custom models.
+
 # Status choices determine whether or not a user can access a given 'Page' instance.
 PAGE_STATUS_CHOICES = (
     ('published', 'published'),
@@ -12,6 +16,7 @@ PAGE_STATUS_CHOICES = (
 
 
 class Page(MPTTModel):
+    # TODO: Add more functionality to Page model.
     """
     Base page model. Includes data to define a standard static HTML page.
     """
