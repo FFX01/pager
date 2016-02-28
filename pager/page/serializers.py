@@ -1,12 +1,18 @@
 from rest_framework import serializers
 from .models import Page
+from django.contrib.auth.models import User
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+        )
 
 
 class PageSerializer(serializers.HyperlinkedModelSerializer):
-
-    author = serializers.ReadOnlyField(
-        source='author.username'
-    )
 
     class Meta:
         model = Page
